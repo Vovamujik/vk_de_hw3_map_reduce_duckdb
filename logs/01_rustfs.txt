@@ -1,0 +1,50 @@
+$ docker version --format $'Docker: \320\272\320\273\320\270\320\265\320\275\321\202 {{.Client.Version}}, \321\201\320\265\321\200\320\262\320\265\321\200 {{.Server.Version}}'
+Docker: клиент 28.2.2, сервер 29.4.3
+
+$ docker compose version
+Docker Compose version v5.1.4
+
+$ docker compose ps --format table\ \{\{.Name\}\}\\t\{\{.Image\}\}\\t\{\{.Status\}\}\\t\{\{.Ports\}\}
+NAME         IMAGE                 STATUS                 PORTS
+hw3-rustfs   rustfs/rustfs:1.0.1   Up 2 hours (healthy)   0.0.0.0:9100->9000/tcp, [::]:9100->9000/tcp, 0.0.0.0:9101->9001/tcp, [::]:9101->9001/tcp
+
+$ docker exec hw3-rustfs rustfs --version
+rustfs 1.0.1
+build time   : 2026-10-03 03:14:05 +00:00
+build profile: release
+build os     : linux-aarch64
+rust version : rustc 1.99.0 (b940084d7 2026-09-28)
+rust channel : stable-aarch64-unknown-linux-gnu
+git branch   : 
+git commit   : 6de965ae3c965a78ff819fbcd7acd4aa44177d92
+git tag      : 1.0.1
+git status   :
+
+
+$ sh -c docker\ logs\ hw3-rustfs\ 2\>\&1\ \|\ head\ -3
+Initializing data directories: /data/rustfs0 /data/rustfs1 /data/rustfs2 /data/rustfs3
+Initializing log directory: /logs
+Starting: /usr/bin/rustfs  /data/rustfs0 /data/rustfs1 /data/rustfs2 /data/rustfs3
+
+$ curl -s -w \\nHTTP\ %\{http_code\}\\n http://localhost:9100/health/ready
+{"status":"ok","service":"rustfs-endpoint","timestamp":"2026-10-19T13:25:01.394959633Z[Etc/Unknown]","version":"1.0.1","ready":true,"details":{"storage":{"status":"connected","ready":true,"readinessScope":"read_quorum","source":"local_runtime","readQuorum":true,"writeQuorum":true,"unavailableDrives":[]},"iam":{"status":"connected","ready":true},"lock":{"status":"connected","ready":true},"poolMetadata":{"ready":true,"status":"writable"}},"degradedReasons":[]}
+HTTP 200
+
+$ docker exec hw3-rustfs sh -c du\ -sh\ /data/rustfs\*
+822M	/data/rustfs0
+822M	/data/rustfs1
+822M	/data/rustfs2
+822M	/data/rustfs3
+
+$ docker exec hw3-rustfs sh -c find\ /data/rustfs0/vacancies/raw\ -type\ f\ \|\ sort\ \|\ head\ -8\;\ echo\ ...\;\ find\ /data/rustfs0/vacancies/raw\ -type\ f\ \|\ wc\ -l
+/data/rustfs0/vacancies/raw/it_vacancies_2024.csv/c83913b2-6468-4d2d-9122-0166aaf25a0d/part.1
+/data/rustfs0/vacancies/raw/it_vacancies_2024.csv/c83913b2-6468-4d2d-9122-0166aaf25a0d/part.1.meta
+/data/rustfs0/vacancies/raw/it_vacancies_2024.csv/c83913b2-6468-4d2d-9122-0166aaf25a0d/part.10
+/data/rustfs0/vacancies/raw/it_vacancies_2024.csv/c83913b2-6468-4d2d-9122-0166aaf25a0d/part.10.meta
+/data/rustfs0/vacancies/raw/it_vacancies_2024.csv/c83913b2-6468-4d2d-9122-0166aaf25a0d/part.11
+/data/rustfs0/vacancies/raw/it_vacancies_2024.csv/c83913b2-6468-4d2d-9122-0166aaf25a0d/part.11.meta
+/data/rustfs0/vacancies/raw/it_vacancies_2024.csv/c83913b2-6468-4d2d-9122-0166aaf25a0d/part.12
+/data/rustfs0/vacancies/raw/it_vacancies_2024.csv/c83913b2-6468-4d2d-9122-0166aaf25a0d/part.12.meta
+...
+103
+

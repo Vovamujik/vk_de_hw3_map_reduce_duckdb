@@ -1,0 +1,52 @@
+Источник: s3://vacancies/raw/it_vacancies_2024.csv, вариант optimized
+== MapReduce, задача skill_counts
+сплитов 26, GET-запросов 51, прочитано 849,257,809 байт
+записей 229,388, разобрано как CSV 8,720, битых строк 0
+map выдал 161,469 пар (key, value), в shuffle ушло 105,324 ключей
+уникальных ключей по размеру комбинации: k=1: 623, k=2: 7,124, k=3: 38,414
+фазы, с: setup_s 0.23, map_s 6.47, reduce_s 0.24, total_s 6.95
+профиль: wall_s 6.96, cpu_s 11.474, cpu_util 1.65, peak_rss_tree_mb 1015.0, peak_rss_main_mb 65.4, maxrss_main_mb 65.4, maxrss_child_mb 138.7, peak_procs 10
+-- топ-10, skills.csv
+  1911  go
+   990  postgresql
+   579  docker
+   511  kafka
+   433  sql
+   424  kubernetes
+   423  git
+   407  linux
+   317  redis
+   312  rabbitmq
+-- топ-10, pairs.csv
+   946  go + postgresql
+   559  docker + go
+   495  go + kafka
+   414  go + sql
+   411  go + kubernetes
+   395  go + linux
+   391  git + go
+   384  docker + postgresql
+   366  kafka + postgresql
+   305  go + redis
+-- топ-10, triples.csv
+   372  docker + go + postgresql
+   355  go + kafka + postgresql
+   250  go + kubernetes + postgresql
+   240  git + go + postgresql
+   222  docker + go + kubernetes
+   216  go + postgresql + sql
+   207  docker + git + go
+   206  go + postgresql + rabbitmq
+   206  go + postgresql + redis
+   173  docker + go + kafka
+
+== MapReduce, задача salary_by_combination
+сплитов 26, GET-запросов 51, прочитано 849,257,809 байт
+записей 229,388, разобрано как CSV 8,720, битых строк 0
+map выдал 58,989 пар (key, value), в shuffle ушло 44,790 ключей
+уникальных ключей по размеру комбинации: k=0: 1, k=1: 296, k=2: 3,238, k=3: 16,563
+фазы, с: setup_s 0.02, map_s 4.78, reduce_s 0.25, total_s 5.04
+профиль: wall_s 5.056, cpu_s 9.458, cpu_util 1.87, peak_rss_tree_mb 1082.8, peak_rss_main_mb 62.6, maxrss_main_mb 65.4, maxrss_child_mb 156.0, peak_procs 10
+Go-вакансии с зарплатой: 465 уникальных предложений от 258 работодателей, медиана 250,000 руб. на руки
+
+Результаты в RustFS: s3://vacancies/results/mapreduce/combo_salary.csv, s3://vacancies/results/mapreduce/pairs.csv, s3://vacancies/results/mapreduce/skills.csv, s3://vacancies/results/mapreduce/triples.csv

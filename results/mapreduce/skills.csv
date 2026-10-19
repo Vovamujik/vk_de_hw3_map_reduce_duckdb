@@ -1,0 +1,624 @@
+skill,vacancies
+go,1911
+postgresql,990
+docker,579
+kafka,511
+sql,433
+kubernetes,424
+git,423
+linux,407
+redis,317
+rabbitmq,312
+rest,258
+grpc,235
+python,207
+mysql,203
+clickhouse,184
+it,173
+php,160
+api,129
+mongodb,124
+backend,122
+ооп,108
+микросервисы,95
+базы данных,81
+elasticsearch,80
+ci/cd,78
+nosql,77
+java,71
+http,68
+c++,60
+gitlab,60
+торговая площадка,48
+javascript,45
+c#,44
+jira,44
+nats,44
+unit testing,44
+solid,43
+английский язык,43
+highload,39
+разработка логистики,39
+работа в команде,35
+удаленная работа,32
+управление командой,32
+grafana,31
+ms sql,31
+c/c++,30
+gitlab ci,29
+graphql,29
+prometheus,29
+github,28
+websocket,27
+работа с базами данных,27
+финансы,27
+symfony,26
+tcp/ip,25
+разработка по,25
+разработка платформы,24
+protobuf,23
+node.js,22
+teamleading,21
+c,20
+django,19
+nginx,19
+s3,19
+ansible,18
+devops,18
+qa,18
+swagger,18
+ddd,17
+docker compose,17
+scrum,17
+рефакторинг кода,17
+soap,16
+разработка поисковых технологий,16
+agile,15
+html,15
+внутренние сервисы,15
+тестирование,15
+aws,14
+unix,14
+vue.js,14
+elk,13
+kotlin,13
+css,12
+flask,12
+https,12
+typescript,12
+оптимизация кода,12
+code review,11
+gitflow,10
+react,10
+atlassian confluence,9
+bash,9
+ci,9
+fastapi,9
+gin,9
+jenkins,9
+pgx,9
+субд,9
+jwt,8
+laravel,8
+php7,8
+алгоритмы и структуры данных,8
+геосервисы,8
+логистика,8
+cleanenv,7
+dry,7
+go-playground/validator,7
+json api,7
+julienschmidt/httprouter,7
+kiss,7
+onrun,7
+openapi,7
+xml,7
+веб-программирование,7
+обучение и развитие,7
+ответственность,7
+работа с большим объемом информации,7
+руководство командой разработчиков,7
+android,6
+blockchain,6
+cassandra,6
+developer,6
+flash mysql,6
+json,6
+json-rpc,6
+nomad,6
+oracle,6
+roadrunner,6
+ruby,6
+sqlalchemy,6
+swift,6
+программист,6
+разработчик,6
+game programming,5
+gamedev,5
+html5,5
+lead,5
+lua,5
+rust,5
+senior,5
+spring framework,5
+storage,5
+автоматизация,5
+высоконагруженные системы,5
+проектирование и разработка отказоустойчивых систем,5
+разработка приложений для linux,5
+самостоятельность,5
+тим лид,5
+тимлид,5
+"умение проектировать и разрабатывать api (как rest, так и grpc)",5
+умение работать с реляционными и no sql базами данных,5
+12 factor apps,4
+architecture,4
+azure,4
+beta-тестирования,4
+big data,4
+cloud,4
+consul,4
+debian,4
+erlang,4
+evm,4
+hashicorp vault,4
+ios,4
+json/xml,4
+mercurial,4
+ms access,4
+openshift,4
+openstack,4
+solidity,4
+spring boot,4
+ssh,4
+test case,4
+web,4
+английский — b1 — средний,4
+брокеры сообщений,4
+информационная безопасность,4
+математическое моделирование,4
+оперативный поиск информации в сети интернет,4
+проектирование архитектуры,4
+умение организовать работу,4
+управление проектами,4
+active directory,3
+agile project management,3
+ajax,3
+angularjs,3
+cd,3
+cgo,3
+clojure,3
+consumer goods,3
+development,3
+dfs,3
+digital signatures,3
+electron,3
+encryption,3
+etl,3
+freelpa,3
+"golang, git, mysql, mongodb",3
+grps,3
+http/rest,3
+istio,3
+istio service mesh,3
+ldap,3
+mariadb,3
+memcached,3
+ml,3
+nest.js,3
+opensearch,3
+opensource,3
+puppet,3
+revel,3
+rps,3
+saga,3
+samba,3
+software development,3
+software engineering,3
+svn,3
+tarantool,3
+time series analysis,3
+vmware,3
+webrtc,3
+wss,3
+zerolog,3
+адаптивность,3
+аккуратность в отчетах и оценках,3
+архитектура,3
+бинарный поиск,3
+желание обучаться,3
+код-ревью,3
+корректное формирование ожиданий,3
+логика,3
+математическая статистика,3
+написание текстов,3
+начало карьеры,3
+постановка задач разработчикам,3
+проектирование архитектуры приложений,3
+руководство коллективом,3
+серверное программирование,3
+сетевые протоколы,3
+средний (middle),3
+структура данных,3
+творчество,3
+умение принимать решения,3
+управленческие навыки,3
+фулстек разработчик,3
+функциональное тестирование,3
+хеши,3
+aiohttp,2
+amocrm,2
+amqp,2
+anti-ddos,2
+awt,2
+back end,2
+celery,2
+ceph,2
+clean architecture,2
+cloud-native,2
+cockroachdb,2
+dbms,2
+docer,2
+docker g,2
+domain driven design,2
+dpi,2
+ebpf,2
+ebpf/xdp,2
+echo,2
+elixir,2
+es6,2
+fintech,2
+gcp,2
+go micro,2
+go-way,2
+golang go docker redis linux git,2
+google cloud platform,2
+gorm,2
+grpc api,2
+hadoop,2
+haskell,2
+helm,2
+iam,2
+idp,2
+iptables,2
+iscsi,2
+jetbrains phpstorm,2
+keydb,2
+kibana,2
+kvm,2
+leadership skills,2
+logstash,2
+loki,2
+machine learning,2
+make,2
+maridadb,2
+mqtt,2
+ms excel,2
+nas,2
+network testing,2
+nfs,2
+ngfw,2
+nodejs,2
+nvmeof,2
+oauth/oidc,2
+opentelemetry,2
+osi,2
+perl,2
+php 8,2
+php8,2
+postman,2
+postresql,2
+raster arts,2
+rest/grpc api,2
+rpc,2
+san,2
+sanic,2
+selenium,2
+senior developer,2
+sentry,2
+sip,2
+smb,2
+socket,2
+software-defined storage,2
+sql/nosql,2
+sqlx,2
+ssl,2
+ssl/tls,2
+sso,2
+statistics,2
+stl,2
+tcp,2
+tdd,2
+teamlead,2
+terraform,2
+udp,2
+web3,2
+websoket,2
+ydb,2
+yii,2
+yii2,2
+автоматизация процессов,2
+автоматизация тестирования,2
+автоматизированное тестирование,2
+автотестирование,2
+администрирование сетевого оборудования,2
+аналитическое мышление,2
+кafka,2
+командообразование,2
+коммуникабельность,2
+лидерство,2
+машинное обучение,2
+нейронные сети,2
+построение индивидуальных планов развития,2
+проведение тестирований,2
+работа с авариями,2
+решение нестандартных задач,2
+ручное тестирование,2
+сети,2
+системное мышление,2
+субд clickhouse,2
+субд postresql,2
+транспортная логистика,2
+умение анализировать,2
+управление временем,2
+финансы it,2
+хранение и обработка данных,2
+.net core,1
+.net framework,1
+acid,1
+activemq,1
+aerospike,1
+ai,1
+air tranportation,1
+airtable,1
+angular,1
+apache,1
+apache airflow,1
+apache http server,1
+apache jmeter,1
+apache maven,1
+api (rest/grpc),1
+architecture framework,1
+artificial intelligence,1
+asio,1
+asn,1
+asyncapi,1
+asyncio,1
+av,1
+b2 английский,1
+b2b,1
+backend api,1
+bgp,1
+bigtable,1
+bitbucket,1
+bitrix,1
+bpmn,1
+bubble,1
+calico,1
+cel-go,1
+centos,1
+cilium,1
+cisco,1
+client_golang,1
+conducting interviews,1
+confluence,1
+continuous integration,1
+copier,1
+css3,1
+csv,1
+cybersecurity,1
+django rest framework,1
+docker и kubernetes,1
+docker/kubernetes,1
+doctrine,1
+ds,1
+edr,1
+elk stack,1
+estaff,1
+etherium,1
+ext js,1
+firewall,1
+flutter flow,1
+foreman,1
+functional,1
+gatling,1
+gnu linux,1
+go java,1
+go v 1.18+,1
+goevaluate,1
+goland,1
+golang разработка,1
+"golang, redis postgresql / mysql rest api, grpc git",1
+"golang, sql, rest api",1
+google api,1
+gorilla mux,1
+gprc,1
+gоlang,1
+hibernate orm,1
+hive,1
+http rest,1
+http server,1
+hydra,1
+iaas/paas,1
+in-memory,1
+influxdb,1
+information security,1
+integration,1
+ios/android,1
+iot,1
+iron python,1
+jquery,1
+"js,",1
+jsonslice,1
+junior,1
+juniper,1
+junit,1
+k8,1
+kanban,1
+kratos,1
+leadership development,1
+linux/gcp,1
+linuх,1
+locust,1
+metabase,1
+minio,1
+mvc,1
+n8n,1
+nestjs,1
+network,1
+nft,1
+no-code,1
+no-code development,1
+noc,1
+npm,1
+nsq,1
+oathkeeper,1
+ojg,1
+okta,1
+open ai,1
+openapi.,1
+openproject,1
+opentracing,1
+oracle pl/sql,1
+orm,1
+ovirt,1
+paas,1
+pandas,1
+penetest,1
+pentest,1
+pgsql,1
+phd,1
+phpunit,1
+pl/python,1
+podman,1
+pos терминалы,1
+posrgresql,1
+postgesql,1
+postgis,1
+pt swarm,1
+pub/sub,1
+pxe,1
+pyautogui,1
+pydantic,1
+pytest,1
+qt,1
+rdbms,1
+react router,1
+react storybook,1
+react.js,1
+redis cluster,1
+redis/keydb,1
+redpanda,1
+redux,1
+reverse,1
+routing,1
+rpc api,1
+rs485,1
+rxjava,1
+saas,1
+scada softwares,1
+scylladb,1
+security,1
+selenium ide,1
+snmp,1
+soa,1
+soiidity,1
+solid/dry/kiss,1
+sonarqube,1
+spark,1
+splunk,1
+spring,1
+sql server,1
+sql-запросы,1
+sqlite,1
+system design,1
+team lead,1
+tls,1
+toml,1
+uber fx,1
+ubuntu,1
+ui,1
+uikit,1
+uml,1
+unit тесты,1
+unix shell scripts,1
+usb,1
+vertica,1
+victoria metrics,1
+video streaming,1
+vitrualbox,1
+vue js,1
+web sockets,1
+web-приложение,1
+web-сервисы,1
+websoft/webtutor,1
+xlsx,1
+xmlquery,1
+xmpp,1
+yaml,1
+zabbix,1
+zapier,1
+zend framework,1
+администрирование серверов linux,1
+алгоритмы,1
+аналитический склад ума,1
+английский язык - a 1- начальный,1
+виртуализация,1
+высокая энергичность и инициативность,1
+высокий уровень самоорганизации,1
+высшее техническое образование,1
+горутины,1
+желание работать и зарабатывать,1
+желание учиться и развиваться,1
+ии,1
+интеграции,1
+искусственный интеллект,1
+ит-инфраструктура,1
+коммуникативные навыки,1
+критическое мышление,1
+лидерские качества,1
+маршрутизация динамическая,1
+маршрутизация статическая,1
+математика,1
+математический анализ,1
+мобильные приложения,1
+нагрузочное тестирование,1
+наставничество,1
+настройка сетевых подключений,1
+нелинейное программирование,1
+общение с людьми,1
+опыт работы с postgresql,1
+организаторские навыки,1
+ос linux,1
+ответственность и пунктуальность,1
+отличное знание go,1
+планирование,1
+платежные системы,1
+поисковые системы,1
+проактивность,1
+продуктовая разработка,1
+проектирование,1
+разработка api,1
+разработка нового продукта,1
+разработка продукта,1
+робототехника,1
+сlickhouse,1
+серверное оборудование,1
+сетевые информационные технологии,1
+соблюдение дедлайнов,1
+способность самостоятельно принимать решения,1
+стремление к профессиональному росту,1
+стрессоустойчивость,1
+теория тестирования,1
+тестирование мобильных приложений,1
+тестирование на проникновение,1
+торговое оборудование,1
+умение добиваться поставленных целей,1
+умение работать в команде,1
+умение работать в условиях многозадачности,1
+"умение работать как самостоятельно, так и в команде",1
+управление разработкой,1
+фреш,1
+хорошее знание sql,1
+чтение английской документации,1
+язык программирования go,1

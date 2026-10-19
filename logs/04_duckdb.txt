@@ -1,0 +1,238 @@
+DuckDB 1.5.6, потоков 12, вариант materialized
+Источник: read_csv('s3://vacancies/raw/it_vacancies_2024.csv', header = true, all_varchar = true)
+go_vacancies: 2,751 вакансий; go_skills: 11,540 строк (вакансий с навыками 2,038)
+-- skills.csv: 623 строк, топ-10
+  1911  go
+   990  postgresql
+   579  docker
+   511  kafka
+   433  sql
+   424  kubernetes
+   423  git
+   407  linux
+   317  redis
+   312  rabbitmq
+-- pairs.csv: 7,124 строк, топ-10
+   946  go + postgresql
+   559  docker + go
+   495  go + kafka
+   414  go + sql
+   411  go + kubernetes
+   395  go + linux
+   391  git + go
+   384  docker + postgresql
+   366  kafka + postgresql
+   305  go + redis
+-- triples.csv: 38,414 строк, топ-10
+   372  docker + go + postgresql
+   355  go + kafka + postgresql
+   250  go + kubernetes + postgresql
+   240  git + go + postgresql
+   222  docker + go + kubernetes
+   216  go + postgresql + sql
+   207  docker + git + go
+   206  go + postgresql + rabbitmq
+   206  go + postgresql + redis
+   173  docker + go + kafka
+фазы, с: load_s 4.457, total_s 4.492
+профиль: wall_s 4.498, cpu_s 3.429, cpu_util 0.76, peak_rss_tree_mb 435.5, peak_rss_main_mb 435.5, maxrss_main_mb 435.5, maxrss_child_mb 0.0, peak_procs 1
+-- EXPLAIN ANALYZE: сканирование объекта и фильтр Go
+┌─────────────────────────────────────┐
+│┌───────────────────────────────────┐│
+││    Query Profiling Information    ││
+│└───────────────────────────────────┘│
+└─────────────────────────────────────┘
+EXPLAIN ANALYZE SELECT count(*) FROM read_csv('s3://vacancies/raw/it_vacancies_2024.csv', header = true, all_varchar = true) WHERE regexp_matches(name, '(^|[^A-Za-z0-9_])(?i:go|golang)([^A-Za-z0-9_]|$)')
+┌─────────────────────────────────────┐
+│┌───────────────────────────────────┐│
+││         HTTPFS HTTP Stats         ││
+││                                   ││
+││           in: 808.3 MiB           ││
+││            out: 0 bytes           ││
+││              #HEAD: 1             ││
+││              #GET: 27             ││
+││              #PUT: 0              ││
+││              #POST: 0             ││
+││             #DELETE: 0            ││
+│└───────────────────────────────────┘│
+└─────────────────────────────────────┘
+┌────────────────────────────────────────────────┐
+│┌──────────────────────────────────────────────┐│
+││               Total Time: 3.84s              ││
+│└──────────────────────────────────────────────┘│
+└────────────────────────────────────────────────┘
+┌───────────────────────────┐
+│           QUERY           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│      EXPLAIN_ANALYZE      │
+│    ────────────────────   │
+│                           │
+│           0 rows          │
+│           0.00s           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│    UNGROUPED_AGGREGATE    │
+│    ────────────────────   │
+│        Aggregates:        │
+│        count_star()       │
+│                           │
+│                           │
+│                           │
+│           1 row           │
+│           0.00s           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│           FILTER          │
+│    ────────────────────   │
+│ regexp_matches(name, '(^|[│
+│ ^A-Za-z0-9_])(?i:go|golang│
+│    )([^A-Za-z0-9_]|$)')   │
+│                           │
+│                           │
+│                           │
+│         2,751 rows        │
+│           0.07s           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         TABLE_SCAN        │
+│    ────────────────────   │
+│     Function: READ_CSV    │
+│     Projections: name     │
+│    Total Files Read: 1    │
+│                           │
+│        Filename(s):       │
+│     s3://vacancies/raw    │
+│   /it_vacancies_2024.csv  │
+│                           │
+│                           │
+│                           │
+│        229,388 rows       │
+│           39.37s          │
+└───────────────────────────┘
+
+-- EXPLAIN ANALYZE: тройки навыков
+┌─────────────────────────────────────┐
+│┌───────────────────────────────────┐│
+││    Query Profiling Information    ││
+│└───────────────────────────────────┘│
+└─────────────────────────────────────┘
+EXPLAIN ANALYZE SELECT a.skill, b.skill, c.skill, count(*) FROM go_skills a JOIN go_skills b ON b.vacancy_id = a.vacancy_id AND a.skill < b.skill JOIN go_skills c ON c.vacancy_id = a.vacancy_id AND b.skill < c.skill GROUP BY ALL
+┌─────────────────────────────────────┐
+│┌───────────────────────────────────┐│
+││         HTTPFS HTTP Stats         ││
+││                                   ││
+││            in: 0 bytes            ││
+││            out: 0 bytes           ││
+││              #HEAD: 0             ││
+││              #GET: 0              ││
+││              #PUT: 0              ││
+││              #POST: 0             ││
+││             #DELETE: 0            ││
+│└───────────────────────────────────┘│
+└─────────────────────────────────────┘
+┌────────────────────────────────────────────────┐
+│┌──────────────────────────────────────────────┐│
+││              Total Time: 0.0140s             ││
+│└──────────────────────────────────────────────┘│
+└────────────────────────────────────────────────┘
+┌───────────────────────────┐
+│           QUERY           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│      EXPLAIN_ANALYZE      │
+│    ────────────────────   │
+│                           │
+│           0 rows          │
+│           0.00s           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│       HASH_GROUP_BY       │
+│    ────────────────────   │
+│          Groups:          │
+│             #0            │
+│             #1            │
+│             #2            │
+│                           │
+│        Aggregates:        │
+│        count_star()       │
+│                           │
+│                           │
+│                           │
+│        38,414 rows        │
+│           0.01s           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│           skill           │
+│           skill           │
+│           skill           │
+│                           │
+│                           │
+│                           │
+│        110,673 rows       │
+│           0.00s           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         HASH_JOIN         │
+│    ────────────────────   │
+│      Join Type: INNER     │
+│                           │
+│        Conditions:        │
+│  vacancy_id = vacancy_id  │
+│       skill > skill       ├───────────────────────────────────────────┐
+│                           │                                           │
+│                           │                                           │
+│                           │                                           │
+│        110,673 rows       │                                           │
+│           0.00s           │                                           │
+└─────────────┬─────────────┘                                           │
+┌─────────────┴─────────────┐                             ┌─────────────┴─────────────┐
+│         HASH_JOIN         │                             │         TABLE_SCAN        │
+│    ────────────────────   │                             │    ────────────────────   │
+│      Join Type: INNER     │                             │           Table:          │
+│                           │                             │   memory.main.go_skills   │
+│        Conditions:        │                             │                           │
+│  vacancy_id = vacancy_id  │                             │   Type: Sequential Scan   │
+│       skill < skill       │                             │                           │
+│                           ├──────────────┐              │        Projections:       │
+│                           │              │              │         vacancy_id        │
+│                           │              │              │           skill           │
+│                           │              │              │                           │
+│           0.00s           │              │              │                           │
+│                           │              │              │                           │
+│        39,256 rows        │              │              │        11,540 rows        │
+│          (0.00s)          │              │              │           0.00s           │
+└─────────────┬─────────────┘              │              └───────────────────────────┘
+┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│         TABLE_SCAN        ││         TABLE_SCAN        │
+│    ────────────────────   ││    ────────────────────   │
+│           Table:          ││           Table:          │
+│   memory.main.go_skills   ││   memory.main.go_skills   │
+│                           ││                           │
+│   Type: Sequential Scan   ││   Type: Sequential Scan   │
+│                           ││                           │
+│        Projections:       ││        Projections:       │
+│         vacancy_id        ││         vacancy_id        │
+│           skill           ││           skill           │
+│                           ││                           │
+│      Dynamic Filters:     ││                           │
+│   optional: vacancy_id>=  ││                           │
+│ '100040902' AND optional: ││                           │
+│   vacancy_id<='99983838'  ││           0.00s           │
+│  AND optional: vacancy_id>││                           │
+│ ='100040902' AND optional:││                           │
+│   vacancy_id<='99983838'  ││                           │
+│   optional: skill>='.net  ││                           │
+│  core' AND optional: skill││                           │
+│  <='язык программирования ││                           │
+│             go'           ││                           │
+│                           ││                           │
+│                           ││                           │
+│                           ││                           │
+│        11,540 rows        ││        11,540 rows        │
+│           0.00s           ││          (0.00s)          │
+└───────────────────────────┘└───────────────────────────┘
+
+Результаты в RustFS: s3://vacancies/results/duckdb/pairs.csv, s3://vacancies/results/duckdb/skills.csv, s3://vacancies/results/duckdb/triples.csv

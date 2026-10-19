@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+work/
+data/
+report/build/
+.DS_Store
+.idea/
+.pytest_cache/
+results/bench/*.tmp.jsonl
+.ruff_cache/
+# Отчёт: в репозитории только PDF; исходник LaTeX и его сборка остаются локально
+report/*
+!report/hw3_mapreduce_duckdb_report.pdf
+scripts/build_report.py
+scripts/make_figures.py

@@ -1,0 +1,344 @@
+[
+  {
+    "config": "mr_baseline",
+    "desc": "MR «до»: 1 процесс, разбор всех строк, без combiner, shuffle сортировкой",
+    "method": "mapreduce",
+    "reps": 3,
+    "wall_median_s": 8.33,
+    "wall_min_s": 8.171,
+    "wall_max_s": 8.77,
+    "wall_median_raw_s": 8.33,
+    "cpu_median_s": 5.89,
+    "peak_rss_tree_mb": 1011.3,
+    "maxrss_main_mb": 1034.5,
+    "maxrss_child_mb": 0.0,
+    "bytes_read": 849257809,
+    "digests": [
+      "4020496dcffd0b57"
+    ]
+  },
+  {
+    "config": "mr_w1_plain",
+    "desc": "MR: 1 процесс, построчное декодирование, hash-shuffle в файлы; без предфильтра и combiner",
+    "method": "mapreduce",
+    "reps": 3,
+    "wall_median_s": 7.97,
+    "wall_min_s": 7.883,
+    "wall_max_s": 8.051,
+    "wall_median_raw_s": 7.973,
+    "cpu_median_s": 5.85,
+    "peak_rss_tree_mb": 183.9,
+    "maxrss_main_mb": 189.8,
+    "maxrss_child_mb": 0.0,
+    "bytes_read": 849257809,
+    "digests": [
+      "4020496dcffd0b57"
+    ]
+  },
+  {
+    "config": "mr_w1_comb",
+    "desc": "+ combiner на стороне map",
+    "method": "mapreduce",
+    "reps": 3,
+    "wall_median_s": 7.83,
+    "wall_min_s": 7.792,
+    "wall_max_s": 7.885,
+    "wall_median_raw_s": 7.829,
+    "cpu_median_s": 5.81,
+    "peak_rss_tree_mb": 183.3,
+    "maxrss_main_mb": 188.3,
+    "maxrss_child_mb": 0.0,
+    "bytes_read": 849257809,
+    "digests": [
+      "4020496dcffd0b57"
+    ]
+  },
+  {
+    "config": "mr_w1_regex",
+    "desc": "+ предфильтр строк, первая версия (регулярка с lookbehind)",
+    "method": "mapreduce",
+    "reps": 3,
+    "wall_median_s": 15.69,
+    "wall_min_s": 15.502,
+    "wall_max_s": 15.78,
+    "wall_median_raw_s": 15.694,
+    "cpu_median_s": 13.39,
+    "peak_rss_tree_mb": 135.0,
+    "maxrss_main_mb": 138.9,
+    "maxrss_child_mb": 0.0,
+    "bytes_read": 849257809,
+    "digests": [
+      "4020496dcffd0b57"
+    ]
+  },
+  {
+    "config": "mr_w1_pref",
+    "desc": "+ предфильтр строк, итоговая версия (поиск по литералу)",
+    "method": "mapreduce",
+    "reps": 3,
+    "wall_median_s": 4.58,
+    "wall_min_s": 4.522,
+    "wall_max_s": 4.751,
+    "wall_median_raw_s": 4.582,
+    "cpu_median_s": 2.62,
+    "peak_rss_tree_mb": 155.6,
+    "maxrss_main_mb": 156.9,
+    "maxrss_child_mb": 0.0,
+    "bytes_read": 849257809,
+    "digests": [
+      "4020496dcffd0b57"
+    ]
+  },
+  {
+    "config": "mr_w8_regex",
+    "desc": "8 процессов, первая версия предфильтра",
+    "method": "mapreduce",
+    "reps": 3,
+    "wall_median_s": 5.11,
+    "wall_min_s": 4.982,
+    "wall_max_s": 5.217,
+    "wall_median_raw_s": 5.107,
+    "cpu_median_s": 18.81,
+    "peak_rss_tree_mb": 1249.5,
+    "maxrss_main_mb": 70.0,
+    "maxrss_child_mb": 165.5,
+    "bytes_read": 849257809,
+    "digests": [
+      "4020496dcffd0b57"
+    ]
+  },
+  {
+    "config": "mr_w2",
+    "desc": "+ 2 процесса",
+    "method": "mapreduce",
+    "reps": 3,
+    "wall_median_s": 4.21,
+    "wall_min_s": 4.195,
+    "wall_max_s": 4.282,
+    "wall_median_raw_s": 4.209,
+    "cpu_median_s": 3.76,
+    "peak_rss_tree_mb": 381.4,
+    "maxrss_main_mb": 74.4,
+    "maxrss_child_mb": 152.6,
+    "bytes_read": 849257809,
+    "digests": [
+      "4020496dcffd0b57"
+    ]
+  },
+  {
+    "config": "mr_w4",
+    "desc": "+ 4 процесса",
+    "method": "mapreduce",
+    "reps": 3,
+    "wall_median_s": 3.84,
+    "wall_min_s": 3.793,
+    "wall_max_s": 3.908,
+    "wall_median_raw_s": 3.837,
+    "cpu_median_s": 4.89,
+    "peak_rss_tree_mb": 654.9,
+    "maxrss_main_mb": 74.5,
+    "maxrss_child_mb": 153.6,
+    "bytes_read": 849257809,
+    "digests": [
+      "4020496dcffd0b57"
+    ]
+  },
+  {
+    "config": "mr_w8",
+    "desc": "+ 8 процессов (как в запуске этапа 3)",
+    "method": "mapreduce",
+    "reps": 3,
+    "wall_median_s": 4.1,
+    "wall_min_s": 4.095,
+    "wall_max_s": 4.1,
+    "wall_median_raw_s": 4.097,
+    "cpu_median_s": 8.2,
+    "peak_rss_tree_mb": 1209.0,
+    "maxrss_main_mb": 69.2,
+    "maxrss_child_mb": 166.5,
+    "bytes_read": 849257809,
+    "digests": [
+      "4020496dcffd0b57"
+    ]
+  },
+  {
+    "config": "mr_w12",
+    "desc": "+ 12 процессов",
+    "method": "mapreduce",
+    "reps": 3,
+    "wall_median_s": 4.46,
+    "wall_min_s": 4.396,
+    "wall_max_s": 4.499,
+    "wall_median_raw_s": 4.458,
+    "cpu_median_s": 12.02,
+    "peak_rss_tree_mb": 1532.8,
+    "maxrss_main_mb": 69.1,
+    "maxrss_child_mb": 170.5,
+    "bytes_read": 849257809,
+    "digests": [
+      "4020496dcffd0b57"
+    ]
+  },
+  {
+    "config": "mr_w8_s8",
+    "desc": "8 процессов, сплит 8 МиБ",
+    "method": "mapreduce",
+    "reps": 3,
+    "wall_median_s": 4.12,
+    "wall_min_s": 4.018,
+    "wall_max_s": 4.297,
+    "wall_median_raw_s": 4.121,
+    "cpu_median_s": 8.51,
+    "peak_rss_tree_mb": 808.5,
+    "maxrss_main_mb": 74.8,
+    "maxrss_child_mb": 94.6,
+    "bytes_read": 854238621,
+    "digests": [
+      "4020496dcffd0b57"
+    ]
+  },
+  {
+    "config": "mr_w8_s64",
+    "desc": "8 процессов, сплит 64 МиБ",
+    "method": "mapreduce",
+    "reps": 3,
+    "wall_median_s": 4.38,
+    "wall_min_s": 4.299,
+    "wall_max_s": 4.443,
+    "wall_median_raw_s": 4.376,
+    "cpu_median_s": 8.5,
+    "peak_rss_tree_mb": 1522.5,
+    "maxrss_main_mb": 69.0,
+    "maxrss_child_mb": 199.4,
+    "bytes_read": 848405828,
+    "digests": [
+      "4020496dcffd0b57"
+    ]
+  },
+  {
+    "config": "mr_w8_s128",
+    "desc": "8 процессов, сплит 128 МиБ",
+    "method": "mapreduce",
+    "reps": 3,
+    "wall_median_s": 4.47,
+    "wall_min_s": 4.459,
+    "wall_max_s": 4.557,
+    "wall_median_raw_s": 4.466,
+    "cpu_median_s": 7.58,
+    "peak_rss_tree_mb": 1811.5,
+    "maxrss_main_mb": 74.4,
+    "maxrss_child_mb": 327.5,
+    "bytes_read": 848012606,
+    "digests": [
+      "4020496dcffd0b57"
+    ]
+  },
+  {
+    "config": "mr_segment",
+    "desc": "MR по выделенному сегменту Go, 1 процесс",
+    "method": "mapreduce",
+    "reps": 3,
+    "wall_median_s": 0.28,
+    "wall_min_s": 0.279,
+    "wall_max_s": 0.3,
+    "wall_median_raw_s": 0.283,
+    "cpu_median_s": 0.24,
+    "peak_rss_tree_mb": 93.0,
+    "maxrss_main_mb": 94.4,
+    "maxrss_child_mb": 0.0,
+    "bytes_read": 10699361,
+    "digests": [
+      "4020496dcffd0b57"
+    ]
+  },
+  {
+    "config": "db_naive",
+    "desc": "DuckDB «до»: 3 запроса, каждый читает CSV с автоопределением",
+    "method": "duckdb",
+    "reps": 3,
+    "wall_median_s": 12.11,
+    "wall_min_s": 11.611,
+    "wall_max_s": 14.369,
+    "wall_median_raw_s": 12.114,
+    "cpu_median_s": 8.2,
+    "peak_rss_tree_mb": 536.4,
+    "maxrss_main_mb": 536.4,
+    "maxrss_child_mb": 0.0,
+    "bytes_read": null,
+    "digests": [
+      "00075e61ca94fa50"
+    ]
+  },
+  {
+    "config": "db_csv_t1",
+    "desc": "DuckDB: одно чтение CSV в таблицу, 1 поток",
+    "method": "duckdb",
+    "reps": 3,
+    "wall_median_s": 4.71,
+    "wall_min_s": 4.097,
+    "wall_max_s": 4.737,
+    "wall_median_raw_s": 4.706,
+    "cpu_median_s": 2.69,
+    "peak_rss_tree_mb": 269.8,
+    "maxrss_main_mb": 269.8,
+    "maxrss_child_mb": 0.0,
+    "bytes_read": null,
+    "digests": [
+      "00075e61ca94fa50"
+    ]
+  },
+  {
+    "config": "db_csv",
+    "desc": "DuckDB: одно чтение CSV в таблицу, все потоки",
+    "method": "duckdb",
+    "reps": 3,
+    "wall_median_s": 4.03,
+    "wall_min_s": 3.862,
+    "wall_max_s": 4.188,
+    "wall_median_raw_s": 4.03,
+    "cpu_median_s": 2.75,
+    "peak_rss_tree_mb": 360.5,
+    "maxrss_main_mb": 364.2,
+    "maxrss_child_mb": 0.0,
+    "bytes_read": null,
+    "digests": [
+      "00075e61ca94fa50"
+    ]
+  },
+  {
+    "config": "db_parquet",
+    "desc": "DuckDB: Parquet, 13 столбцов, zstd",
+    "method": "duckdb",
+    "reps": 3,
+    "wall_median_s": 0.15,
+    "wall_min_s": 0.149,
+    "wall_max_s": 0.155,
+    "wall_median_raw_s": 0.154,
+    "cpu_median_s": 0.23,
+    "peak_rss_tree_mb": 182.0,
+    "maxrss_main_mb": 184.1,
+    "maxrss_child_mb": 0.0,
+    "bytes_read": null,
+    "digests": [
+      "00075e61ca94fa50"
+    ]
+  },
+  {
+    "config": "db_segment",
+    "desc": "DuckDB: выделенный сегмент Go (CSV)",
+    "method": "duckdb",
+    "reps": 3,
+    "wall_median_s": 0.32,
+    "wall_min_s": 0.309,
+    "wall_max_s": 0.323,
+    "wall_median_raw_s": 0.32,
+    "cpu_median_s": 0.37,
+    "peak_rss_tree_mb": 167.2,
+    "maxrss_main_mb": 167.3,
+    "maxrss_child_mb": 0.0,
+    "bytes_read": null,
+    "digests": [
+      "00075e61ca94fa50"
+    ]
+  }
+]

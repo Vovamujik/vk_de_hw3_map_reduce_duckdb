@@ -1,0 +1,5 @@
+quartile,offers,min_salary,max_salary,median,with_skills,avg_skills,top_skills
+1,118,21750.0,175125.0,119000.0,100,7.6,"go 85%, git 55%, postgresql 46%, docker 37%, sql 36%, mysql 29%, linux 26%, rest 25%"
+2,124,180000.0,250000.0,225000.0,101,6.9,"go 92%, postgresql 63%, docker 43%, git 43%, sql 25%, linux 24%, rest 24%, redis 23%"
+3,125,252300.0,350000.0,300000.0,104,6.7,"go 96%, postgresql 59%, docker 38%, kafka 32%, rabbitmq 27%, redis 26%, clickhouse 22%, git 21%"
+4,98,363660.0,826500.0,450000.0,66,4.8,"go 97%, postgresql 39%, docker 32%, git 23%, kubernetes 20%, kafka 17%, sql 17%, rabbitmq 14%"

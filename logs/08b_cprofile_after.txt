@@ -1,0 +1,22 @@
+предфильтр: fast; сплит 5: байты [167,772,160, 201,326,592)
+статистика таска: {'split': 5, 'records': 9288, 'parsed': 283, 'malformed': 0, 'emitted': 4633, 'keys': 3315, 'bytes': 33619969, 'requests': 2, 'read_s': 0.14014699996914715, 'total_s': 0.1758462080033496}
+         58257 function calls (58201 primitive calls) in 0.176 seconds
+
+   Ordered by: internal time
+   List reduced from 631 to 12 due to restriction <12>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     2039    0.124    0.000    0.124    0.000 {method 'recv_into' of '_socket.socket' objects}
+        1    0.010    0.010    0.010    0.010 {method 'count' of 'bytearray' objects}
+        1    0.007    0.007    0.007    0.007 {method 'lower' of 'bytearray' objects}
+      910    0.007    0.000    0.007    0.000 {method 'search' of 're.Pattern' objects}
+        1    0.004    0.004    0.176    0.176 mapreduce.py:135(run_map_task)
+     2039    0.002    0.000    0.129    0.000 socket.py:710(readinto)
+        2    0.002    0.001    0.138    0.069 s3.py:45(get_range)
+       34    0.002    0.000    0.127    0.004 {method 'read' of '_io.BufferedReader' objects}
+        1    0.002    0.002    0.140    0.140 mapreduce.py:90(read_split)
+      283    0.001    0.000    0.001    0.000 {method 'decode' of 'bytearray' objects}
+     2039    0.001    0.000    0.001    0.000 {method '_checkReadable' of '_io._IOBase' objects}
+     3315    0.001    0.000    0.002    0.000 mapreduce.py:122(partition)
+
+

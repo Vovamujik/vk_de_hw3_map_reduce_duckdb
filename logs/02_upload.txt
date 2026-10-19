@@ -1,0 +1,17 @@
+RustFS: http://localhost:9100
+Источник: it_vacancies_2024.csv (847,619,384 байт)
+SHA-256 локально: 303db922b541e4440906f5a7e8be32fb55e8808f950ffddb8c272f1548212a65
+Бакет vacancies уже есть
+Загружено s3://vacancies/raw/it_vacancies_2024.csv за 4.3 с (187 МиБ/с)
+HEAD: размер 847,619,384 байт, ETag "be9c1b4b3f57ff0e9771004c2a5fe78b-51"
+SHA-256 из RustFS: 303db922b541e4440906f5a7e8be32fb55e8808f950ffddb8c272f1548212a65
+Целостность: OK, хеши совпали
+
+Объекты с префиксом raw/:
+    847,619,384  raw/it_vacancies_2024.csv
+
+Сколько этот объект занимает на каждой папке-диске RustFS (EC 2+2: 2 части данных + 2 чётности):
+423846468	/data/rustfs0/vacancies/raw/it_vacancies_2024.csv
+423846468	/data/rustfs1/vacancies/raw/it_vacancies_2024.csv
+423846468	/data/rustfs2/vacancies/raw/it_vacancies_2024.csv
+423846468	/data/rustfs3/vacancies/raw/it_vacancies_2024.csv

@@ -1,0 +1,37 @@
+[
+  {
+    "workers": 1,
+    "wall_s": 3.69,
+    "mib_s": 219,
+    "rustfs_cpu_avg": 42,
+    "rustfs_cpu_max": 58.58
+  },
+  {
+    "workers": 2,
+    "wall_s": 3.37,
+    "mib_s": 240,
+    "rustfs_cpu_avg": 47,
+    "rustfs_cpu_max": 53.17
+  },
+  {
+    "workers": 4,
+    "wall_s": 3.4,
+    "mib_s": 238,
+    "rustfs_cpu_avg": 52,
+    "rustfs_cpu_max": 66.15
+  },
+  {
+    "workers": 8,
+    "wall_s": 3.38,
+    "mib_s": 239,
+    "rustfs_cpu_avg": 44,
+    "rustfs_cpu_max": 77.59
+  },
+  {
+    "workers": 16,
+    "wall_s": 3.88,
+    "mib_s": 208,
+    "rustfs_cpu_avg": 120,
+    "rustfs_cpu_max": 464.97
+  }
+]
