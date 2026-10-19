@@ -43,6 +43,16 @@ def reduce_offer_median(key: tuple, values: list[tuple]) -> tuple[int, int, floa
     return len(offers), len(employers), statistics.median(offers.values())
 
 
+def map_control(fields: list[str], cols: dict[str, int]):
+    """Контрольные числа для сверки с DuckDB: вакансий Go, из них с навыками, всего упоминаний навыков."""
+    if N.is_go_title(fields[cols["name"]]):
+        skills = N.vacancy_skills(fields[cols["key_skills"]])
+        yield ("go_vacancies",), 1
+        if skills:
+            yield ("with_skills",), 1
+            yield ("skill_mentions",), len(skills)
+
+
 SKILL_COUNTS = Job(
     "skill_counts", map_skill_combinations, reduce_sum, combiner=operator.add, prefilter=N.go_candidate_lines
 )
@@ -50,4 +60,5 @@ SKILL_COUNTS = Job(
 SALARY_BY_COMBINATION = Job(
     "salary_by_combination", map_salary_by_combination, reduce_offer_median, prefilter=N.go_candidate_lines
 )
-JOBS = {"skills": SKILL_COUNTS, "salary": SALARY_BY_COMBINATION}
+CONTROL = Job("control", map_control, reduce_sum, combiner=operator.add, prefilter=N.go_candidate_lines)
+JOBS = {"skills": SKILL_COUNTS, "salary": SALARY_BY_COMBINATION, "control": CONTROL}

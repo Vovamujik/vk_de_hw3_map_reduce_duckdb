@@ -1,0 +1,45 @@
+Источник: s3://hh-lake/raw/it_vacancies_2024.csv, вариант optimized
+== MapReduce, задача skill_counts
+сплитов 26, GET-запросов 51, прочитано 849,257,809 байт
+записей 229,388, разобрано как CSV 8,720, битых строк 0
+map выдал 161,469 пар (key, value), в shuffle ушло 105,324 ключей
+уникальных ключей по размеру комбинации: k=1: 623, k=2: 7,124, k=3: 38,414
+фазы, с: setup_s 0.15, map_s 4.09, reduce_s 0.02, total_s 4.26
+профиль: wall_s 4.437, cpu_s 10.248, cpu_util 2.31, peak_rss_tree_mb 1136.0, peak_rss_main_mb 69.9, maxrss_main_mb 69.9, maxrss_child_mb 159.8, peak_procs 10
+отказ: процесс-воркер умер (BrokenProcessPool): пул создан заново, незавершённых map-тасков: 26
+отказ: перезапуск map-тасков (26 шт.), попытка 2
+отпечаток результата: 4020496dcffd0b57
+-- топ-10, skills.csv
+  1911  go
+   990  postgresql
+   579  docker
+   511  kafka
+   433  sql
+   424  kubernetes
+   423  git
+   407  linux
+   317  redis
+   312  rabbitmq
+-- топ-10, pairs.csv
+   946  go + postgresql
+   559  docker + go
+   495  go + kafka
+   414  go + sql
+   411  go + kubernetes
+   395  go + linux
+   391  git + go
+   384  docker + postgresql
+   366  kafka + postgresql
+   305  go + redis
+-- топ-10, triples.csv
+   372  docker + go + postgresql
+   355  go + kafka + postgresql
+   250  go + kubernetes + postgresql
+   240  git + go + postgresql
+   222  docker + go + kubernetes
+   216  go + postgresql + sql
+   207  docker + git + go
+   206  go + postgresql + rabbitmq
+   206  go + postgresql + redis
+   173  docker + go + kafka
+

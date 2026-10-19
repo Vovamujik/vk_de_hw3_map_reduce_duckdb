@@ -18,7 +18,7 @@ from hw.mapreduce import make_splits
 
 MB = 2**20
 CONCURRENCY = [1, 2, 4, 8, 16]
-REPS = 2
+REPS = 3
 
 
 class DockerCpu:

@@ -1,37 +1,37 @@
 [
   {
     "workers": 1,
-    "wall_s": 3.69,
-    "mib_s": 219,
-    "rustfs_cpu_avg": 42,
-    "rustfs_cpu_max": 58.58
+    "wall_s": 3.57,
+    "mib_s": 227,
+    "rustfs_cpu_avg": 49,
+    "rustfs_cpu_max": 66.93
   },
   {
     "workers": 2,
-    "wall_s": 3.37,
-    "mib_s": 240,
+    "wall_s": 3.43,
+    "mib_s": 236,
     "rustfs_cpu_avg": 47,
-    "rustfs_cpu_max": 53.17
+    "rustfs_cpu_max": 52.4
   },
   {
     "workers": 4,
-    "wall_s": 3.4,
-    "mib_s": 238,
-    "rustfs_cpu_avg": 52,
-    "rustfs_cpu_max": 66.15
+    "wall_s": 3.36,
+    "mib_s": 240,
+    "rustfs_cpu_avg": 91,
+    "rustfs_cpu_max": 311.09
   },
   {
     "workers": 8,
-    "wall_s": 3.38,
-    "mib_s": 239,
-    "rustfs_cpu_avg": 44,
-    "rustfs_cpu_max": 77.59
+    "wall_s": 4.0,
+    "mib_s": 202,
+    "rustfs_cpu_avg": 157,
+    "rustfs_cpu_max": 589.65
   },
   {
     "workers": 16,
-    "wall_s": 3.88,
-    "mib_s": 208,
-    "rustfs_cpu_avg": 120,
-    "rustfs_cpu_max": 464.97
+    "wall_s": 3.85,
+    "mib_s": 210,
+    "rustfs_cpu_avg": 102,
+    "rustfs_cpu_max": 328.05
   }
 ]

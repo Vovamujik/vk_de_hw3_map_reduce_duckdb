@@ -6,7 +6,7 @@ Docker Compose version v5.1.4
 
 $ docker compose ps --format table\ \{\{.Name\}\}\\t\{\{.Image\}\}\\t\{\{.Status\}\}\\t\{\{.Ports\}\}
 NAME         IMAGE                 STATUS                 PORTS
-hw3-rustfs   rustfs/rustfs:1.0.1   Up 2 hours (healthy)   0.0.0.0:9100->9000/tcp, [::]:9100->9000/tcp, 0.0.0.0:9101->9001/tcp, [::]:9101->9001/tcp
+hw3-rustfs   rustfs/rustfs:1.0.1   Up 3 hours (healthy)   0.0.0.0:9100->9000/tcp, [::]:9100->9000/tcp, 0.0.0.0:9101->9001/tcp, [::]:9101->9001/tcp
 
 $ docker exec hw3-rustfs rustfs --version
 rustfs 1.0.1
@@ -27,24 +27,24 @@ Initializing log directory: /logs
 Starting: /usr/bin/rustfs  /data/rustfs0 /data/rustfs1 /data/rustfs2 /data/rustfs3
 
 $ curl -s -w \\nHTTP\ %\{http_code\}\\n http://localhost:9100/health/ready
-{"status":"ok","service":"rustfs-endpoint","timestamp":"2026-10-19T13:25:01.394959633Z[Etc/Unknown]","version":"1.0.1","ready":true,"details":{"storage":{"status":"connected","ready":true,"readinessScope":"read_quorum","source":"local_runtime","readQuorum":true,"writeQuorum":true,"unavailableDrives":[]},"iam":{"status":"connected","ready":true},"lock":{"status":"connected","ready":true},"poolMetadata":{"ready":true,"status":"writable"}},"degradedReasons":[]}
+{"status":"ok","service":"rustfs-endpoint","timestamp":"2026-10-19T14:38:47.42945025Z[Etc/Unknown]","version":"1.0.1","ready":true,"details":{"storage":{"status":"connected","ready":true,"readinessScope":"read_quorum","source":"local_runtime","readQuorum":true,"writeQuorum":true,"unavailableDrives":[]},"iam":{"status":"connected","ready":true},"lock":{"status":"connected","ready":true},"poolMetadata":{"ready":true,"status":"writable"}},"degradedReasons":[]}
 HTTP 200
 
-$ docker exec hw3-rustfs sh -c du\ -sh\ /data/rustfs\*
-822M	/data/rustfs0
-822M	/data/rustfs1
-822M	/data/rustfs2
-822M	/data/rustfs3
+$ docker exec hw3-rustfs sh -c du\ -sh\ /data/rustfs\*/hh-lake
+417M	/data/rustfs0/hh-lake
+417M	/data/rustfs1/hh-lake
+417M	/data/rustfs2/hh-lake
+417M	/data/rustfs3/hh-lake
 
-$ docker exec hw3-rustfs sh -c find\ /data/rustfs0/vacancies/raw\ -type\ f\ \|\ sort\ \|\ head\ -8\;\ echo\ ...\;\ find\ /data/rustfs0/vacancies/raw\ -type\ f\ \|\ wc\ -l
-/data/rustfs0/vacancies/raw/it_vacancies_2024.csv/c83913b2-6468-4d2d-9122-0166aaf25a0d/part.1
-/data/rustfs0/vacancies/raw/it_vacancies_2024.csv/c83913b2-6468-4d2d-9122-0166aaf25a0d/part.1.meta
-/data/rustfs0/vacancies/raw/it_vacancies_2024.csv/c83913b2-6468-4d2d-9122-0166aaf25a0d/part.10
-/data/rustfs0/vacancies/raw/it_vacancies_2024.csv/c83913b2-6468-4d2d-9122-0166aaf25a0d/part.10.meta
-/data/rustfs0/vacancies/raw/it_vacancies_2024.csv/c83913b2-6468-4d2d-9122-0166aaf25a0d/part.11
-/data/rustfs0/vacancies/raw/it_vacancies_2024.csv/c83913b2-6468-4d2d-9122-0166aaf25a0d/part.11.meta
-/data/rustfs0/vacancies/raw/it_vacancies_2024.csv/c83913b2-6468-4d2d-9122-0166aaf25a0d/part.12
-/data/rustfs0/vacancies/raw/it_vacancies_2024.csv/c83913b2-6468-4d2d-9122-0166aaf25a0d/part.12.meta
+$ docker exec hw3-rustfs sh -c find\ /data/rustfs0/hh-lake/raw\ -type\ f\ \|\ sort\ \|\ head\ -8\;\ echo\ ...\;\ find\ /data/rustfs0/hh-lake/raw\ -type\ f\ \|\ wc\ -l
+/data/rustfs0/hh-lake/raw/it_vacancies_2024.csv/29799a16-f4cf-480b-9ba3-8d2a83520876/part.1
+/data/rustfs0/hh-lake/raw/it_vacancies_2024.csv/29799a16-f4cf-480b-9ba3-8d2a83520876/part.1.meta
+/data/rustfs0/hh-lake/raw/it_vacancies_2024.csv/29799a16-f4cf-480b-9ba3-8d2a83520876/part.10
+/data/rustfs0/hh-lake/raw/it_vacancies_2024.csv/29799a16-f4cf-480b-9ba3-8d2a83520876/part.10.meta
+/data/rustfs0/hh-lake/raw/it_vacancies_2024.csv/29799a16-f4cf-480b-9ba3-8d2a83520876/part.11
+/data/rustfs0/hh-lake/raw/it_vacancies_2024.csv/29799a16-f4cf-480b-9ba3-8d2a83520876/part.11.meta
+/data/rustfs0/hh-lake/raw/it_vacancies_2024.csv/29799a16-f4cf-480b-9ba3-8d2a83520876/part.12
+/data/rustfs0/hh-lake/raw/it_vacancies_2024.csv/29799a16-f4cf-480b-9ba3-8d2a83520876/part.12.meta
 ...
 103
 

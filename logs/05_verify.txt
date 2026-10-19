@@ -1,3 +1,8 @@
+контрольное число   MapReduce     DuckDB
+go_vacancies            2,751      2,751   OK
+skill_mentions         11,540     11,540   OK
+with_skills             2,038      2,038   OK
+
 файл               MapReduce   DuckDB только MR только DB разные числа
 skills.csv              623      623       0       0         0   OK
                    сумма частот 11,540 = 11,540; SHA-256 84fbda904a01073e / 84fbda904a01073e

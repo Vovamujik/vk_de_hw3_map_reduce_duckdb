@@ -21,12 +21,12 @@
     "mean": 272754.0
   },
   "profile": {
-    "wall_s": 6.757,
-    "cpu_s": 6.413,
-    "cpu_util": 0.95,
-    "peak_rss_tree_mb": 406.0,
-    "peak_rss_main_mb": 406.0,
-    "maxrss_main_mb": 406.0,
+    "wall_s": 9.076,
+    "cpu_s": 8.443,
+    "cpu_util": 0.93,
+    "peak_rss_tree_mb": 365.4,
+    "peak_rss_main_mb": 365.4,
+    "maxrss_main_mb": 366.5,
     "maxrss_child_mb": 0.0,
     "peak_procs": 1
   }

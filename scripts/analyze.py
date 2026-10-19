@@ -19,7 +19,8 @@ MID_EXPERIENCE = "От 3 до 6 лет"  # самый частый уровен�
 EXPORT = [
     "salary_overview", "salary_by_experience", "salary_by_skill_count", "salary_quartiles",
     "skill_quartile_share", "salary_bounds", "salary_both_bounds", "combo_salary", "combo_effect",
-    "combo_robustness", "region_summary", "region_skills", "region_salary_by_experience", "region_tests",
+    "combo_robustness", "combo_uplift", "combo_growth", "skills_per_vacancy",
+    "region_summary", "region_skills", "region_top_combos", "region_salary_by_experience", "region_tests",
 ]
 ORDER_UP = "delta DESC, above_pct DESC, offers DESC, combo"
 ORDER_DOWN = "delta ASC, above_pct ASC, offers DESC, combo"
@@ -65,6 +66,65 @@ def robustness(con) -> None:
     con.executemany("INSERT INTO combo_robustness VALUES (?, ?, ?, ?, ?, ?)", rows)
 
 
+def combo_growth(con) -> None:
+    """Почему пар и троек больше, чем навыков: вакансия с n навыками даёт C(n, 2) пар и C(n, 3) троек."""
+    con.execute("""
+        CREATE OR REPLACE TABLE skills_per_vacancy AS
+        SELECT n, count(*) AS vacancies FROM (SELECT vacancy_id, count(*) AS n FROM go_skills GROUP BY vacancy_id)
+        GROUP BY n ORDER BY n""")
+    con.execute("""
+        CREATE OR REPLACE TABLE combo_growth AS
+        WITH n AS (SELECT n::HUGEINT AS n, vacancies FROM skills_per_vacancy)
+        SELECT 1 AS k, sum(vacancies * n) AS sum_c, max(n) AS max_c FROM n
+        UNION ALL SELECT 2, sum(vacancies * n * (n - 1) / 2), max(n * (n - 1) / 2) FROM n
+        UNION ALL SELECT 3, sum(vacancies * n * (n - 1) * (n - 2) / 6), max(n * (n - 1) * (n - 2) / 6) FROM n
+        ORDER BY k""")
+
+
+def uplift(con) -> None:
+    """Прибавка от дополнительного навыка к базе.
+
+    База пары — её более частый навык, база тройки — пара из двух её самых частых навыков
+    (частота — число Go-вакансий с навыком, как на этапе 3). Прибавка = медиана комбинации − медиана базы.
+    p — перестановочный тест внутри предложений с базой: случайно выбираем столько же из них,
+    сколько имеют добавленный навык, и смотрим, как часто разница медиан не меньше наблюдаемой.
+    """
+    salary = dict(con.sql("SELECT vacancy_id, salary FROM go_offers").fetchall())
+    frequency = dict(con.sql("SELECT skill, count(*) FROM go_skills GROUP BY skill").fetchall())
+    stats = {}
+    for k, a, b, c, offers, employers, median in con.sql(
+            "SELECT k, skill_1, skill_2, skill_3, offers, employers, median FROM combo_salary WHERE k BETWEEN 1 AND 3"
+    ).fetchall():
+        stats[tuple(s for s in (a, b, c) if s is not None)] = (offers, employers, median)
+    members = {}
+    for a, b, c, ids in con.sql(
+            "SELECT skill_1, skill_2, skill_3, list(vacancy_id) FROM offer_combos WHERE k BETWEEN 1 AND 3 "
+            "GROUP BY skill_1, skill_2, skill_3").fetchall():
+        members[tuple(s for s in (a, b, c) if s is not None)] = set(ids)
+    rng = np.random.default_rng(SEED)
+    rows = []
+    for key in sorted(stats):
+        offers, employers, median = stats[key]
+        if len(key) == 1 or "go" in key or offers < MIN_OFFERS or employers < MIN_EMPLOYERS:
+            continue
+        ranked = sorted(key, key=lambda s: (-frequency[s], s))  # самые частые навыки (по этапу 3) — первыми
+        base, added = tuple(sorted(ranked[:-1])), ranked[-1]
+        base_offers, _, base_median = stats[base]
+        base_ids = sorted(members[base])
+        sal = np.array([salary[v] for v in base_ids])
+        m = len(members[key])
+        observed = median - base_median
+        shuffled = sal[np.argsort(rng.random((N_PERM, len(sal))), axis=1)]
+        diffs = np.median(shuffled[:, :m], axis=1) - base_median
+        p_value = (np.count_nonzero(np.abs(diffs) >= abs(observed) - 1e-9) + 1) / (N_PERM + 1)
+        rows.append((len(key), " + ".join(key), " + ".join(base), added, base_offers, base_median, offers,
+                     employers, median, observed, round(100 * observed / base_median, 1), round(p_value, 4)))
+    con.execute("""CREATE OR REPLACE TABLE combo_uplift (k INTEGER, combo VARCHAR, base VARCHAR, added VARCHAR,
+                   base_offers INTEGER, base_median DOUBLE, offers INTEGER, employers INTEGER, median DOUBLE,
+                   uplift DOUBLE, uplift_pct DOUBLE, p_value DOUBLE)""")
+    con.executemany("INSERT INTO combo_uplift VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", rows)
+
+
 def region_tests(con) -> None:
     """Разница медиан зарплат между регионами и её перестановочный p (по уникальным предложениям региона)."""
     by_area: dict[str, np.ndarray] = {}
@@ -96,6 +156,8 @@ def main() -> None:
         duck.run_sql(con, "salary.sql", MIN_OFFERS=MIN_OFFERS, MIN_EMPLOYERS=MIN_EMPLOYERS)
         duck.run_sql(con, "regions.sql", REGIONS=regions)
         robustness(con)
+        uplift(con)
+        combo_growth(con)
         region_tests(con)
     print("профиль:", ", ".join(f"{k} {v}" for k, v in prof.metrics.items()))
     print(f"пороги: комбинация в >= {MIN_OFFERS} предложениях от >= {MIN_EMPLOYERS} работодателей")
@@ -153,6 +215,21 @@ def main() -> None:
                  f"SELECT {cols} FROM combo_effect JOIN combo_robustness r USING (k, combo) "
                  f"WHERE k = {k} ORDER BY {order} LIMIT {TOP}")
 
+    print("\nПрибавка от дополнительного навыка: медиана комбинации минус медиана её базы "
+          "(для пары — более частого навыка, для тройки — пары из двух самых частых)")
+    ucols = ("combo, base, added, base_offers, base_median::INT base_median, offers, median::INT median, "
+             "uplift::INT uplift, uplift_pct, p_value")
+    for k, label in [(2, "пары"), (3, "тройки")]:
+        show(con, f"{label}: добавленный навык сильнее всего повышает медиану",
+             f"SELECT {ucols} FROM combo_uplift WHERE k = {k} AND uplift > 0 "
+             f"ORDER BY uplift DESC, offers DESC, combo LIMIT {TOP}")
+        show(con, f"{label}: добавленный навык сильнее всего понижает медиану",
+             f"SELECT {ucols} FROM combo_uplift WHERE k = {k} AND uplift < 0 "
+             f"ORDER BY uplift ASC, offers DESC, combo LIMIT {TOP}")
+    show(con, "Рост числа комбинаций: вакансия с n навыками даёт C(n, k) комбинаций",
+         "SELECT k, sum_c, max_c FROM combo_growth")
+    show(con, "Сколько навыков в вакансии", "SELECT n, vacancies FROM skills_per_vacancy", max_rows=30)
+
     show(con, "Этап 6. Три региона и весь сегмент",
          "SELECT * REPLACE (p25::INT AS p25, median::INT AS median, p75::INT AS p75) FROM region_summary")
     show(con, "Топ-10 навыков по регионам (доля среди вакансий региона с навыками)",
@@ -164,6 +241,8 @@ def main() -> None:
          "QUALIFY row_number() OVER (PARTITION BY ord ORDER BY lift DESC, postings DESC, skill) <= 5 ORDER BY ord, lift DESC")
     show(con, "Разница медиан между регионами (перестановочный тест)",
          "SELECT area_a, area_b, offers_a, offers_b, median_diff::INT median_diff, p_value FROM region_tests")
+    show(con, "Топ-5 навыков, пар и троек по регионам (без go)",
+         "SELECT area, k, rnk, combo, vacancies FROM region_top_combos ORDER BY ord, k, rnk", max_rows=50)
     show(con, "Медиана по опыту в регионах",
          "SELECT area, experience, offers, median::INT median FROM region_salary_by_experience")
 

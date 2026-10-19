@@ -1,5 +1,5 @@
 DuckDB 1.5.6, потоков 12, вариант materialized
-Источник: read_csv('s3://vacancies/raw/it_vacancies_2024.csv', header = true, all_varchar = true)
+Источник: read_csv('s3://hh-lake/raw/it_vacancies_2024.csv', header = true, all_varchar = true)
 go_vacancies: 2,751 вакансий; go_skills: 11,540 строк (вакансий с навыками 2,038)
 -- skills.csv: 623 строк, топ-10
   1911  go
@@ -34,15 +34,15 @@ go_vacancies: 2,751 вакансий; go_skills: 11,540 строк (ваканс
    206  go + postgresql + rabbitmq
    206  go + postgresql + redis
    173  docker + go + kafka
-фазы, с: load_s 4.457, total_s 4.492
-профиль: wall_s 4.498, cpu_s 3.429, cpu_util 0.76, peak_rss_tree_mb 435.5, peak_rss_main_mb 435.5, maxrss_main_mb 435.5, maxrss_child_mb 0.0, peak_procs 1
+фазы, с: load_s 3.802, total_s 3.838
+профиль: wall_s 3.845, cpu_s 2.68, cpu_util 0.7, peak_rss_tree_mb 393.3, peak_rss_main_mb 393.3, maxrss_main_mb 394.8, maxrss_child_mb 0.0, peak_procs 1
 -- EXPLAIN ANALYZE: сканирование объекта и фильтр Go
 ┌─────────────────────────────────────┐
 │┌───────────────────────────────────┐│
 ││    Query Profiling Information    ││
 │└───────────────────────────────────┘│
 └─────────────────────────────────────┘
-EXPLAIN ANALYZE SELECT count(*) FROM read_csv('s3://vacancies/raw/it_vacancies_2024.csv', header = true, all_varchar = true) WHERE regexp_matches(name, '(^|[^A-Za-z0-9_])(?i:go|golang)([^A-Za-z0-9_]|$)')
+EXPLAIN ANALYZE SELECT count(*) FROM read_csv('s3://hh-lake/raw/it_vacancies_2024.csv', header = true, all_varchar = true) WHERE regexp_matches(name, '(^|[^A-Za-z0-9_])(?i:go|golang)([^A-Za-z0-9_]|$)')
 ┌─────────────────────────────────────┐
 │┌───────────────────────────────────┐│
 ││         HTTPFS HTTP Stats         ││
@@ -58,7 +58,7 @@ EXPLAIN ANALYZE SELECT count(*) FROM read_csv('s3://vacancies/raw/it_vacancies_2
 └─────────────────────────────────────┘
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││               Total Time: 3.84s              ││
+││               Total Time: 4.01s              ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -102,13 +102,13 @@ EXPLAIN ANALYZE SELECT count(*) FROM read_csv('s3://vacancies/raw/it_vacancies_2
 │    Total Files Read: 1    │
 │                           │
 │        Filename(s):       │
-│     s3://vacancies/raw    │
+│      s3://hh-lake/raw     │
 │   /it_vacancies_2024.csv  │
 │                           │
 │                           │
 │                           │
 │        229,388 rows       │
-│           39.37s          │
+│           42.74s          │
 └───────────────────────────┘
 
 -- EXPLAIN ANALYZE: тройки навыков
@@ -133,7 +133,7 @@ EXPLAIN ANALYZE SELECT a.skill, b.skill, c.skill, count(*) FROM go_skills a JOIN
 └─────────────────────────────────────┘
 ┌────────────────────────────────────────────────┐
 │┌──────────────────────────────────────────────┐│
-││              Total Time: 0.0140s             ││
+││              Total Time: 0.0159s             ││
 │└──────────────────────────────────────────────┘│
 └────────────────────────────────────────────────┘
 ┌───────────────────────────┐
@@ -160,7 +160,7 @@ EXPLAIN ANALYZE SELECT a.skill, b.skill, c.skill, count(*) FROM go_skills a JOIN
 │                           │
 │                           │
 │        38,414 rows        │
-│           0.01s           │
+│           0.02s           │
 └─────────────┬─────────────┘
 ┌─────────────┴─────────────┐
 │         PROJECTION        │
@@ -224,10 +224,10 @@ EXPLAIN ANALYZE SELECT a.skill, b.skill, c.skill, count(*) FROM go_skills a JOIN
 │  AND optional: vacancy_id>││                           │
 │ ='100040902' AND optional:││                           │
 │   vacancy_id<='99983838'  ││                           │
+│ optional: skill<='язык про││                           │
+│   граммирования go' AND   ││                           │
 │   optional: skill>='.net  ││                           │
-│  core' AND optional: skill││                           │
-│  <='язык программирования ││                           │
-│             go'           ││                           │
+│            core'          ││                           │
 │                           ││                           │
 │                           ││                           │
 │                           ││                           │
@@ -235,4 +235,4 @@ EXPLAIN ANALYZE SELECT a.skill, b.skill, c.skill, count(*) FROM go_skills a JOIN
 │           0.00s           ││          (0.00s)          │
 └───────────────────────────┘└───────────────────────────┘
 
-Результаты в RustFS: s3://vacancies/results/duckdb/pairs.csv, s3://vacancies/results/duckdb/skills.csv, s3://vacancies/results/duckdb/triples.csv
+Результаты в RustFS: s3://hh-lake/results/duckdb/control.csv, s3://hh-lake/results/duckdb/pairs.csv, s3://hh-lake/results/duckdb/skills.csv, s3://hh-lake/results/duckdb/triples.csv

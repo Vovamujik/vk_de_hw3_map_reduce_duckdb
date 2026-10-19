@@ -68,6 +68,29 @@ SELECT cnt.ord, cnt.area, cnt.skill, cnt.postings, cnt.employers,
 FROM cnt JOIN denom USING (ord) JOIN seg USING (skill)
 ORDER BY cnt.ord, rnk;
 
+-- Топ-5 навыков, пар и троек в каждом регионе (без самого go: он почти в каждой вакансии).
+CREATE OR REPLACE TABLE region_top_combos AS
+WITH sk AS (
+    SELECT r.ord, r.area, g.vacancy_id, g.skill
+    FROM go_skills g JOIN go_vacancies v USING (vacancy_id) JOIN region_list r USING (area)
+    WHERE g.skill <> 'go'
+), combos AS (
+    SELECT ord, area, 1 AS k, skill AS combo, count(*) AS vacancies FROM sk GROUP BY ALL
+    UNION ALL
+    SELECT a.ord, a.area, 2, a.skill || ' + ' || b.skill, count(*)
+    FROM sk a JOIN sk b ON b.vacancy_id = a.vacancy_id AND a.skill < b.skill GROUP BY ALL
+    UNION ALL
+    SELECT a.ord, a.area, 3, a.skill || ' + ' || b.skill || ' + ' || c.skill, count(*)
+    FROM sk a
+    JOIN sk b ON b.vacancy_id = a.vacancy_id AND a.skill < b.skill
+    JOIN sk c ON c.vacancy_id = a.vacancy_id AND b.skill < c.skill
+    GROUP BY ALL
+)
+SELECT *, row_number() OVER (PARTITION BY ord, k ORDER BY vacancies DESC, combo) AS rnk
+FROM combos
+QUALIFY rnk <= 5
+ORDER BY ord, k, rnk;
+
 CREATE OR REPLACE TABLE region_salary_by_experience AS
 SELECT r.ord, r.area, o.experience, count(*) AS offers, median(o.salary) AS median
 FROM region_offers o JOIN region_list r USING (area)

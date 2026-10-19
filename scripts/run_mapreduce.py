@@ -45,6 +45,13 @@ def write_salary(results: dict, out: Path) -> None:
             w.writerow([len(key), *key, *[""] * (3 - len(key)), offers, employers, repr(median)])
 
 
+def write_control(results: dict, out: Path) -> None:
+    with open(out / "control.csv", "w", newline="", encoding="utf-8") as f:
+        w = csv.writer(f, lineterminator="\n")
+        w.writerow(["metric", "value"])
+        w.writerows([key[0], value] for key, value in sorted(results.items()))
+
+
 def digest(results: dict) -> str:
     """Отпечаток результата: одинаковый у всех конфигураций, если они посчитали одно и то же."""
     h = hashlib.sha256()
@@ -81,7 +88,7 @@ def print_top(results: dict, n: int = 10) -> None:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--job", choices=["skills", "salary", "all"], default="all")
+    ap.add_argument("--job", choices=["skills", "salary", "control", "all"], default="all")
     ap.add_argument("--variant", choices=["optimized", "baseline"], default="optimized")
     ap.add_argument("--source", choices=list(SOURCES), default="raw")
     ap.add_argument("--workers", type=int, default=8)
@@ -91,6 +98,9 @@ def main() -> None:
     ap.add_argument("--no-prefilter", action="store_true")
     ap.add_argument("--prefilter-impl", choices=list(PREFILTERS), default="fast",
                     help="regex — первая, медленная версия предфильтра (для замера «до»)")
+    ap.add_argument("--fail-split", type=int, help="внедрить отказ: map-таск этого сплита падает на первой попытке")
+    ap.add_argument("--fail-mode", choices=["error", "crash"], default="error",
+                    help="error — исключение в таске, crash — падает процесс-воркер")
     ap.add_argument("--no-save", action="store_true", help="не писать результаты (для замеров)")
     ap.add_argument("--metrics-json", help="дописать строку JSON с метриками запуска в этот файл")
     args = ap.parse_args()
@@ -98,25 +108,31 @@ def main() -> None:
     key, split_size = SOURCES[args.source], args.split_mb * 2**20
     print(f"Источник: s3://{settings.BUCKET}/{key}, вариант {args.variant}")
     OUT.mkdir(parents=True, exist_ok=True)
-    for job_name in ["skills", "salary"] if args.job == "all" else [args.job]:
+    for job_name in ["skills", "salary", "control"] if args.job == "all" else [args.job]:
         job = dataclasses.replace(JOBS[job_name], prefilter=PREFILTERS[args.prefilter_impl])
         with Profile() as prof:
             if args.variant == "baseline":
                 res = mr.run_baseline(job, key, split_size=split_size)
             else:
+                failure = mr.Failure(args.fail_split, args.fail_mode) if args.fail_split is not None else None
                 res = mr.run(
                     job, key, split_size=split_size, workers=args.workers, reducers=args.reducers,
-                    use_combiner=not args.no_combiner, use_prefilter=not args.no_prefilter,
+                    use_combiner=not args.no_combiner, use_prefilter=not args.no_prefilter, failure=failure,
                 )
         stats = summarize(job.name, res, prof.metrics)
+        for event in res.retries:
+            print("отказ:", event)
+        print(f"отпечаток результата: {digest(res.results)}")
         if job_name == "skills":
             print_top(res.results)
+        elif job_name == "control":
+            print("контрольные числа:", ", ".join(f"{k[0]} = {v:,}" for k, v in sorted(res.results.items())))
         else:
             offers, employers, median = res.results[()]
             print(f"Go-вакансии с зарплатой: {offers} уникальных предложений от {employers} работодателей, "
                   f"медиана {median:,.0f} руб. на руки")
         if not args.no_save:
-            (write_counts if job_name == "skills" else write_salary)(res.results, OUT)
+            {"skills": write_counts, "salary": write_salary, "control": write_control}[job_name](res.results, OUT)
         if args.metrics_json:
             config = {k: v for k, v in vars(args).items() if k not in ("metrics_json", "no_save")}
             row = {"method": "mapreduce", **config, "job": job_name, **prof.metrics, **res.timings,

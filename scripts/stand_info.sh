@@ -14,6 +14,6 @@ run docker compose ps --format 'table {{.Name}}\t{{.Image}}\t{{.Status}}\t{{.Por
 run docker exec hw3-rustfs rustfs --version
 run sh -c 'docker logs hw3-rustfs 2>&1 | head -3'
 run curl -s -w '\nHTTP %{http_code}\n' "http://localhost:$PORT/health/ready"
-run docker exec hw3-rustfs sh -c 'du -sh /data/rustfs*'
+run docker exec hw3-rustfs sh -c "du -sh /data/rustfs*/$BUCKET"
 # Как лёг исходный CSV на первую папку-диск: метаданные xl.meta и части part.N
 run docker exec hw3-rustfs sh -c "find /data/rustfs0/$BUCKET/raw -type f | sort | head -8; echo ...; find /data/rustfs0/$BUCKET/raw -type f | wc -l"

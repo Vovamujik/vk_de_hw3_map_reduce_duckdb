@@ -24,3 +24,11 @@ COPY (
     GROUP BY ALL
     ORDER BY vacancies DESC, skill_1, skill_2, skill_3
 ) TO '${OUT}/triples.csv' (HEADER);
+
+-- Контрольные числа для сверки с MapReduce.
+COPY (
+    SELECT 'go_vacancies' AS metric, count(*) AS value FROM go_vacancies
+    UNION ALL SELECT 'skill_mentions', count(*) FROM go_skills
+    UNION ALL SELECT 'with_skills', count(DISTINCT vacancy_id) FROM go_skills
+    ORDER BY metric
+) TO '${OUT}/control.csv' (HEADER);

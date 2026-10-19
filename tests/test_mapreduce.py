@@ -629,3 +629,26 @@ def test_skill_combinations():
     ]
     assert list(N.skill_combinations([])) == []
     assert list(N.skill_combinations([], k_min=0)) == [()]
+
+
+# ---------------------------------------------------------------- отказ маппера
+
+
+def test_map_task_error_is_retried(store):
+    """Исключение в map-таске: таск перезапускается, результат тот же, что без отказа."""
+    data = make_vacancies(random.Random(21), 150)
+    store[KEY] = data
+    res = mapreduce.run(jobs.SKILL_COUNTS, KEY, split_size=512, workers=1, reducers=2,
+                        failure=mapreduce.Failure(split=1, mode="error"))
+    assert res.results == reference(jobs.SKILL_COUNTS, data)
+    assert any("map-таск 1: попытка 1" in e for e in res.retries)
+
+
+def test_worker_crash_is_retried(spawn_pool):
+    """Процесс-воркер умирает посреди map-фазы: пул пересоздаётся, незавершённые таски идут заново."""
+    data = make_vacancies(random.Random(22), 150)
+    spawn_pool[KEY] = data
+    res = mapreduce.run(jobs.SKILL_COUNTS, KEY, split_size=512, workers=2, reducers=2,
+                        failure=mapreduce.Failure(split=2, mode="crash"))
+    assert res.results == reference(jobs.SKILL_COUNTS, data)
+    assert any("BrokenProcessPool" in e for e in res.retries)

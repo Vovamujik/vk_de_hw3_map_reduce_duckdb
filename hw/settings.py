@@ -25,7 +25,7 @@ S3_ENDPOINT = os.environ.get("S3_ENDPOINT", "http://localhost:9100")
 S3_ACCESS_KEY = os.environ.get("S3_ACCESS_KEY", "")
 S3_SECRET_KEY = os.environ.get("S3_SECRET_KEY", "")
 S3_REGION = os.environ.get("S3_REGION", "us-east-1")
-BUCKET = os.environ.get("S3_BUCKET", "vacancies")
+BUCKET = os.environ.get("S3_BUCKET", "hh-lake")
 SOURCE_CSV = Path(os.path.expanduser(os.environ.get("SOURCE_CSV", "~/Downloads/it_vacancies_2024.csv")))
 
 RAW_KEY = "raw/it_vacancies_2024.csv"

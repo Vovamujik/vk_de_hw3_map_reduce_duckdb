@@ -1,0 +1,110 @@
+k,combo,base,added,base_offers,base_median,offers,employers,median,uplift,uplift_pct,p_value
+2,api + docker,docker,api,140,245000.0,18,9,287500.0,42500.0,17.3,0.184
+2,api + git,git,api,135,200000.0,18,11,250000.0,50000.0,25.0,0.1756
+2,api + postgresql,postgresql,api,197,250000.0,24,11,250000.0,0.0,0.0,1.0
+2,api + sql,sql,api,90,218750.0,18,9,250000.0,31250.0,14.3,0.3553
+2,backend + docker,docker,backend,140,245000.0,16,14,200000.0,-45000.0,-18.4,0.1926
+2,backend + postgresql,postgresql,backend,197,250000.0,20,12,245000.0,-5000.0,-2.0,0.8264
+2,ci/cd + docker,docker,ci/cd,140,245000.0,15,11,261000.0,16000.0,6.5,0.6891
+2,ci/cd + postgresql,postgresql,ci/cd,197,250000.0,15,11,300000.0,50000.0,20.0,0.3025
+2,clickhouse + docker,docker,clickhouse,140,245000.0,18,13,300000.0,55000.0,22.4,0.0964
+2,clickhouse + git,git,clickhouse,135,200000.0,16,12,300000.0,100000.0,50.0,0.009
+2,clickhouse + kafka,kafka,clickhouse,79,280000.0,15,8,300000.0,20000.0,7.1,0.7896
+2,clickhouse + postgresql,postgresql,clickhouse,197,250000.0,27,19,300000.0,50000.0,20.0,0.1642
+2,docker + git,docker,git,140,245000.0,71,51,225000.0,-20000.0,-8.2,0.3213
+3,docker + git + linux,docker + git,linux,71,225000.0,23,17,217500.0,-7500.0,-3.3,0.7512
+3,docker + git + postgresql,docker + postgresql,git,84,250000.0,50,34,250000.0,0.0,0.0,1.0
+3,docker + git + redis,docker + git,redis,71,225000.0,23,15,250000.0,25000.0,11.1,0.4275
+3,docker + git + rest,docker + git,rest,71,225000.0,26,19,221250.0,-3750.0,-1.7,0.8782
+3,docker + git + sql,docker + git,sql,71,225000.0,22,14,217987.5,-7012.5,-3.1,0.7786
+2,docker + grpc,docker,grpc,140,245000.0,25,18,250000.0,5000.0,2.0,1.0
+3,docker + grpc + postgresql,docker + postgresql,grpc,84,250000.0,16,12,275000.0,25000.0,10.0,0.5505
+2,docker + kafka,docker,kafka,140,245000.0,34,24,260000.0,15000.0,6.1,0.5147
+3,docker + kafka + postgresql,docker + postgresql,kafka,84,250000.0,21,14,300000.0,50000.0,20.0,0.2048
+3,docker + kafka + redis,docker + kafka,redis,34,260000.0,16,11,222500.0,-37500.0,-14.4,0.3277
+2,docker + kubernetes,docker,kubernetes,140,245000.0,38,31,255500.0,10500.0,4.3,0.5925
+3,docker + kubernetes + postgresql,docker + postgresql,kubernetes,84,250000.0,21,18,240000.0,-10000.0,-4.0,0.6621
+3,docker + kubernetes + redis,docker + redis,kubernetes,46,245000.0,17,15,200000.0,-45000.0,-18.4,0.2573
+2,docker + linux,docker,linux,140,245000.0,30,22,221250.0,-23750.0,-9.7,0.3703
+3,docker + linux + postgresql,docker + postgresql,linux,84,250000.0,18,14,237500.0,-12500.0,-5.0,0.7311
+2,docker + mysql,docker,mysql,140,245000.0,28,22,200000.0,-45000.0,-18.4,0.0906
+2,docker + php,docker,php,140,245000.0,19,15,250000.0,5000.0,2.0,1.0
+2,docker + postgresql,postgresql,docker,197,250000.0,84,59,250000.0,0.0,0.0,1.0
+3,docker + postgresql + rabbitmq,docker + postgresql,rabbitmq,84,250000.0,24,18,250000.0,0.0,0.0,1.0
+3,docker + postgresql + redis,docker + postgresql,redis,84,250000.0,32,24,250000.0,0.0,0.0,1.0
+3,docker + postgresql + rest,docker + postgresql,rest,84,250000.0,24,17,221250.0,-28750.0,-11.5,0.3455
+3,docker + postgresql + sql,docker + postgresql,sql,84,250000.0,22,12,237500.0,-12500.0,-5.0,0.6657
+2,docker + rabbitmq,docker,rabbitmq,140,245000.0,34,25,250000.0,5000.0,2.0,0.9176
+3,docker + rabbitmq + redis,docker + redis,rabbitmq,46,245000.0,22,16,250000.0,5000.0,2.0,0.8822
+2,docker + redis,docker,redis,140,245000.0,46,35,245000.0,0.0,0.0,1.0
+2,docker + rest,docker,rest,140,245000.0,33,24,217500.0,-27500.0,-11.2,0.3099
+2,docker + sql,docker,sql,140,245000.0,40,26,240000.0,-5000.0,-2.0,0.907
+2,docker + ооп,docker,ооп,140,245000.0,15,7,225000.0,-20000.0,-8.2,0.6919
+2,elasticsearch + postgresql,postgresql,elasticsearch,197,250000.0,16,8,287500.0,37500.0,15.0,0.3013
+2,git + grpc,git,grpc,135,200000.0,20,17,228625.0,28625.0,14.3,0.3301
+2,git + kafka,git,kafka,135,200000.0,19,11,250000.0,50000.0,25.0,0.219
+2,git + kubernetes,git,kubernetes,135,200000.0,16,12,250000.0,50000.0,25.0,0.1814
+2,git + linux,git,linux,135,200000.0,41,32,200000.0,0.0,0.0,1.0
+3,git + linux + postgresql,git + postgresql,linux,84,217500.0,24,19,217500.0,0.0,0.0,1.0
+2,git + mysql,git,mysql,135,200000.0,34,24,127750.0,-72250.0,-36.1,0.0026
+3,git + mysql + postgresql,git + postgresql,mysql,84,217500.0,16,12,113100.0,-104400.0,-48.0,0.006
+2,git + php,git,php,135,200000.0,19,14,150000.0,-50000.0,-25.0,0.2132
+2,git + postgresql,postgresql,git,197,250000.0,84,60,217500.0,-32500.0,-13.0,0.018
+3,git + postgresql + redis,git + postgresql,redis,84,217500.0,21,15,250000.0,32500.0,14.9,0.1898
+3,git + postgresql + rest,git + postgresql,rest,84,217500.0,29,21,217500.0,0.0,0.0,1.0
+3,git + postgresql + sql,git + postgresql,sql,84,217500.0,33,19,210975.0,-6525.0,-3.0,0.7373
+2,git + python,git,python,135,200000.0,23,16,150000.0,-50000.0,-25.0,0.179
+2,git + rabbitmq,git,rabbitmq,135,200000.0,19,13,239750.0,39750.0,19.9,0.2653
+2,git + redis,git,redis,135,200000.0,27,19,240000.0,40000.0,20.0,0.1648
+2,git + rest,git,rest,135,200000.0,43,32,210105.0,10105.0,5.1,0.5365
+3,git + rest + sql,git + sql,rest,47,200000.0,15,12,140000.0,-60000.0,-30.0,0.192
+2,git + sql,git,sql,135,200000.0,47,32,200000.0,0.0,0.0,1.0
+2,git + базы данных,git,базы данных,135,200000.0,15,7,300000.0,100000.0,50.0,0.0226
+2,git + ооп,git,ооп,135,200000.0,23,12,200000.0,0.0,0.0,1.0
+2,grpc + kafka,kafka,grpc,79,280000.0,19,12,300000.0,20000.0,7.1,0.7652
+3,grpc + kafka + postgresql,kafka + postgresql,grpc,55,300000.0,16,9,300000.0,0.0,0.0,1.0
+2,grpc + postgresql,postgresql,grpc,197,250000.0,41,28,250000.0,0.0,0.0,1.0
+3,grpc + postgresql + rest,postgresql + rest,grpc,47,225000.0,20,14,300000.0,75000.0,33.3,0.0048
+2,grpc + redis,redis,grpc,74,250000.0,18,14,250000.0,0.0,0.0,1.0
+2,grpc + rest,rest,grpc,71,217500.0,23,16,300000.0,82500.0,37.9,0.0016
+2,kafka + kubernetes,kafka,kubernetes,79,280000.0,16,12,235000.0,-45000.0,-16.1,0.1436
+2,kafka + postgresql,postgresql,kafka,197,250000.0,55,32,300000.0,50000.0,20.0,0.0452
+3,kafka + postgresql + rabbitmq,kafka + postgresql,rabbitmq,55,300000.0,19,13,300000.0,0.0,0.0,1.0
+3,kafka + postgresql + redis,kafka + postgresql,redis,55,300000.0,16,10,300000.0,0.0,0.0,1.0
+3,kafka + postgresql + rest,kafka + postgresql,rest,55,300000.0,21,11,250000.0,-50000.0,-16.7,0.1656
+2,kafka + rabbitmq,kafka,rabbitmq,79,280000.0,29,17,275000.0,-5000.0,-1.8,0.9224
+2,kafka + redis,kafka,redis,79,280000.0,24,17,300000.0,20000.0,7.1,0.6241
+2,kafka + rest,kafka,rest,79,280000.0,25,15,250000.0,-30000.0,-10.7,0.2631
+2,kafka + sql,sql,kafka,90,218750.0,18,12,262500.0,43750.0,20.0,0.203
+2,kubernetes + postgresql,postgresql,kubernetes,197,250000.0,30,22,250000.0,0.0,0.0,1.0
+2,kubernetes + rabbitmq,rabbitmq,kubernetes,73,261000.0,21,14,275000.0,14000.0,5.4,0.5867
+2,kubernetes + redis,redis,kubernetes,74,250000.0,19,17,240000.0,-10000.0,-4.0,0.5033
+2,kubernetes + rest,rest,kubernetes,71,217500.0,17,13,250000.0,32500.0,14.9,0.3113
+2,linux + mysql,linux,mysql,80,226200.0,16,14,155000.0,-71200.0,-31.5,0.047
+2,linux + postgresql,postgresql,linux,197,250000.0,39,32,239250.0,-10750.0,-4.3,0.4965
+2,linux + python,linux,python,80,226200.0,15,12,200000.0,-26200.0,-11.6,0.3611
+2,linux + redis,linux,redis,80,226200.0,18,14,250000.0,23800.0,10.5,0.4221
+2,linux + sql,sql,linux,90,218750.0,19,14,210975.0,-7775.0,-3.6,0.7824
+2,mongodb + postgresql,postgresql,mongodb,197,250000.0,22,15,237500.0,-12500.0,-5.0,0.6577
+2,mongodb + rabbitmq,rabbitmq,mongodb,73,261000.0,16,8,300000.0,39000.0,14.9,0.2919
+2,mongodb + redis,redis,mongodb,74,250000.0,17,12,300000.0,50000.0,20.0,0.2376
+2,mysql + php,mysql,php,66,200000.0,20,14,170000.0,-30000.0,-15.0,0.3515
+2,mysql + postgresql,postgresql,mysql,197,250000.0,29,22,200000.0,-50000.0,-20.0,0.1618
+2,mysql + redis,redis,mysql,74,250000.0,15,12,225000.0,-25000.0,-10.0,0.4161
+2,mysql + rest,rest,mysql,71,217500.0,17,13,147900.0,-69600.0,-32.0,0.02
+2,php + postgresql,postgresql,php,197,250000.0,18,12,250000.0,0.0,0.0,1.0
+2,postgresql + python,postgresql,python,197,250000.0,20,13,201250.0,-48750.0,-19.5,0.1574
+2,postgresql + rabbitmq,postgresql,rabbitmq,197,250000.0,52,33,260000.0,10000.0,4.0,0.4505
+3,postgresql + rabbitmq + redis,postgresql + redis,rabbitmq,51,250000.0,25,16,250000.0,0.0,0.0,1.0
+2,postgresql + redis,postgresql,redis,197,250000.0,51,36,250000.0,0.0,0.0,1.0
+2,postgresql + rest,postgresql,rest,197,250000.0,47,31,225000.0,-25000.0,-10.0,0.2801
+2,postgresql + sql,postgresql,sql,197,250000.0,49,30,235000.0,-15000.0,-6.0,0.4093
+2,postgresql + базы данных,postgresql,базы данных,197,250000.0,19,10,300000.0,50000.0,20.0,0.2458
+2,postgresql + микросервисы,postgresql,микросервисы,197,250000.0,15,12,300000.0,50000.0,20.0,0.3087
+2,postgresql + ооп,postgresql,ооп,197,250000.0,17,8,225000.0,-25000.0,-10.0,0.5507
+2,python + sql,sql,python,90,218750.0,20,15,140000.0,-78750.0,-36.0,0.041
+2,rabbitmq + redis,redis,rabbitmq,74,250000.0,33,21,250000.0,0.0,0.0,1.0
+2,rabbitmq + sql,sql,rabbitmq,90,218750.0,16,12,250000.0,31250.0,14.3,0.3881
+2,redis + rest,redis,rest,74,250000.0,16,12,200000.0,-50000.0,-20.0,0.1692
+2,rest + sql,sql,rest,90,218750.0,20,17,137500.0,-81250.0,-37.1,0.0222
+2,sql + ооп,sql,ооп,90,218750.0,19,8,225000.0,6250.0,2.9,0.8698

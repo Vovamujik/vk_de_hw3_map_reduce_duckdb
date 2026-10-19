@@ -1,22 +1,22 @@
 предфильтр: regex; сплит 5: байты [167,772,160, 201,326,592)
-статистика таска: {'split': 5, 'records': 9288, 'parsed': 283, 'malformed': 0, 'emitted': 4633, 'keys': 3315, 'bytes': 33619969, 'requests': 2, 'read_s': 0.16641095897648484, 'total_s': 0.5684623339911923}
-         57508 function calls (57452 primitive calls) in 0.568 seconds
+статистика таска: {'split': 5, 'records': 9288, 'parsed': 283, 'malformed': 0, 'emitted': 4633, 'keys': 3315, 'bytes': 33619969, 'requests': 2, 'read_s': 0.1428863750770688, 'total_s': 0.525667583104223, 'attempt': 1}
+         58181 function calls (58125 primitive calls) in 0.526 seconds
 
    Ordered by: internal time
-   List reduced from 630 to 12 due to restriction <12>
+   List reduced from 634 to 12 due to restriction <12>
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-      599    0.380    0.001    0.380    0.001 {method 'search' of 're.Pattern' objects}
-     2076    0.154    0.000    0.154    0.000 {method 'recv_into' of '_socket.socket' objects}
-        1    0.010    0.010    0.010    0.010 {method 'count' of 'bytearray' objects}
-        1    0.004    0.004    0.568    0.568 mapreduce.py:135(run_map_task)
-     2076    0.002    0.000    0.157    0.000 socket.py:710(readinto)
-       34    0.001    0.000    0.151    0.004 {method 'read' of '_io.BufferedReader' objects}
-        2    0.001    0.001    0.166    0.083 s3.py:45(get_range)
+      599    0.363    0.001    0.363    0.001 {method 'search' of 're.Pattern' objects}
+     2208    0.134    0.000    0.134    0.000 {method 'recv_into' of '_socket.socket' objects}
+        1    0.009    0.009    0.009    0.009 {method 'count' of 'bytearray' objects}
+        1    0.004    0.004    0.526    0.526 mapreduce.py:168(run_map_task)
+     2208    0.001    0.000    0.136    0.000 socket.py:710(readinto)
       283    0.001    0.000    0.001    0.000 {method 'decode' of 'bytearray' objects}
-     3315    0.001    0.000    0.002    0.000 mapreduce.py:122(partition)
-     2076    0.001    0.000    0.001    0.000 {method '_checkReadable' of '_io._IOBase' objects}
+        2    0.001    0.000    0.142    0.071 s3.py:45(get_range)
+       34    0.001    0.000    0.130    0.004 {method 'read' of '_io.BufferedReader' objects}
+     3315    0.001    0.000    0.002    0.000 mapreduce.py:138(partition)
 4014/4004    0.001    0.000    0.001    0.000 {method 'join' of 'str' objects}
-        1    0.001    0.001    0.166    0.166 mapreduce.py:90(read_split)
+        1    0.001    0.001    0.143    0.143 mapreduce.py:106(read_split)
+     2208    0.001    0.000    0.001    0.000 {method '_checkReadable' of '_io._IOBase' objects}
 
 

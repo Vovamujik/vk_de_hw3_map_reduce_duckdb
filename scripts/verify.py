@@ -32,6 +32,10 @@ def load_salary(key: str) -> dict[tuple, tuple[int, int, float]]:
     return out
 
 
+def load_control(key: str) -> dict[str, int]:
+    return {row["metric"]: int(row["value"]) for row in csv.DictReader(io.StringIO(s3.read_text(key)))}
+
+
 def fingerprint(data: dict) -> str:
     h = hashlib.sha256()
     for key, value in sorted(data.items()):
@@ -51,6 +55,13 @@ def compare(name: str, a: dict, b: dict, same) -> bool:
 
 def main() -> None:
     all_ok = True
+    mr_ctl, db_ctl = load_control(f"{MR}/control.csv"), load_control(f"{DUCK}/control.csv")
+    print(f"{'контрольное число':<18} {'MapReduce':>10} {'DuckDB':>10}")
+    for metric in sorted(mr_ctl.keys() | db_ctl.keys()):
+        same = mr_ctl.get(metric) == db_ctl.get(metric)
+        all_ok &= same
+        print(f"{metric:<18} {mr_ctl.get(metric, 0):>10,} {db_ctl.get(metric, 0):>10,}   {'OK' if same else 'РАСХОЖДЕНИЕ'}")
+    print()
     print(f"{'файл':<18} {'MapReduce':>8} {'DuckDB':>8} {'только MR':>7} {'только DB':>7} {'разные числа':>9}")
     for name in COUNT_FILES:
         mr, db = load_counts(f"{MR}/{name}"), load_counts(f"{DUCK}/{name}")
